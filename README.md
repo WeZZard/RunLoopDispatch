@@ -40,23 +40,23 @@ Objective-C
     }
     forTimings: NSRunLoopScheduleTimingNextCycleEnded
     inMode: NSRunLoopCommonModes
-]
+];
 
 // Dispatch a closure in a series of modes when run loop is idle.
 [[NSRunLoop mainRunLoop] scheduleBlock: ^() {
         NSLog(@"Hello, world!");
     }
     forTimings: NSRunLoopScheduleTimingIdle
-    inMode: NSDefaultRunLoopMode, UITrackingRunLoopMode, nil
-]
+    inModes: NSDefaultRunLoopMode, UITrackingRunLoopMode, nil
+];
 
 // Dispatch a closure in an array of modes when run loop is idle.
 [[NSRunLoop mainRunLoop] scheduleBlock: ^() {
         NSLog(@"Hello, world!");
     }
     forTimings: NSRunLoopScheduleTimingIdle
-    inMode: [NSDefaultRunLoopMode, UITrackingRunLoopMode]
-]
+    inSetOfModes: [NSSet setWithArray: @[NSDefaultRunLoopMode, UITrackingRunLoopMode]]
+];
 ```
 
 ## License
