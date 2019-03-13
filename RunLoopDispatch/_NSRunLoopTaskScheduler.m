@@ -58,7 +58,7 @@ static void HandleRunLoopActivity(CFRunLoopObserverRef observer, CFRunLoopActivi
 
 - (void)dealloc
 {
-    NSAssert(!CFRunLoopObserverIsValid(_observer), @"The observer should be invalidated before the scheduler will be deallocated.");
+    NSAssert(!CFRunLoopObserverIsValid(_observer), @"The observer should be invalidated before the scheduler was deallocated.");
 }
 
 - (void)scheduleTask:(NSRunLoopTask *)task
