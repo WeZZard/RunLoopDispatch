@@ -8,8 +8,28 @@
 
 import Foundation
 
+extension RunLoopScheduleTimings {
+    /// Represents the timing when the next run loop cycle began.
+    ///
+    /// - Note: This value equals to `.beforeWaiting`.
+    ///
+    static let nextCycleBegan: RunLoopScheduleTimings = __NSRunLoopScheduleTimingNextCycleBegan
+    
+    /// Represents the timing when the next run loop is idle.
+    ///
+    /// - Note: This value equals to `.beforeWaiting`.
+    ///
+    static let idle: RunLoopScheduleTimings = __NSRunLoopScheduleTimingIdle
+    
+    /// Represents the timing when the current run loop is ended.
+    ///
+    /// - Note: This value equals to `.beforeWaiting`.
+    ///
+    static let currentCycleEnded: RunLoopScheduleTimings = __NSRunLoopScheduleTimingCurrentCycleEnded
+}
+
 extension RunLoop {
-    public typealias Timings = RunLoopScheduleTimings
+    public typealias ScheduleTimings = RunLoopScheduleTimings
     
     /// Schedule a task on the run-loop in specified modes for specified time.
     /// This function is not thread safe.
@@ -24,7 +44,7 @@ extension RunLoop {
     ///
     public func schedule(
         in modes: RunLoop.Mode = RunLoop.Mode.default,
-        for timings: Timings = .anyTime,
+        for timings: ScheduleTimings = .anyTime,
         _ closure: @escaping RunLoopTaskClosure
         )
     {
@@ -44,7 +64,7 @@ extension RunLoop {
     ///
     public func schedule(
         in modes: RunLoop.Mode...,
-        for timings: Timings = .anyTime,
+        for timings: ScheduleTimings = .anyTime,
         _ closure: @escaping RunLoopTaskClosure
         )
     {
@@ -64,7 +84,7 @@ extension RunLoop {
     ///
     public func schedule<Modes: Sequence>(
         in modes: Modes,
-        for timings: Timings = .anyTime,
+        for timings: ScheduleTimings = .anyTime,
         _ closure: @escaping RunLoopTaskClosure
         ) where Modes.Iterator.Element == RunLoop.Mode
     {

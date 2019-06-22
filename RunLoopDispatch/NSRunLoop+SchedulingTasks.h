@@ -11,12 +11,33 @@
 NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_OPTIONS(NSUInteger, NSRunLoopScheduleTimings) {
-    NSRunLoopScheduleTimingNextCycleBegan       = 1 << 0,
-    NSRunLoopScheduleTimingIdle                 = 1 << 1,
-    NSRunLoopScheduleTimingCurrentCycleEnded    = 1 << 2,
+    NSRunLoopScheduleTimingEntry                = 1 << 0,
+    NSRunLoopScheduleTimingBeforeTimers         = 1 << 1,
+    NSRunLoopScheduleTimingBeforeSources        = 1 << 2,
+    NSRunLoopScheduleTimingBeforeWaiting        = 1 << 3,
+    NSRunLoopScheduleTimingAfterWaiting         = 1 << 4,
+    NSRunLoopScheduleTimingExit                 = 1 << 5,
     
     NSRunLoopScheduleTimingAll                  = 0b111,
 } NS_SWIFT_NAME(RunLoopScheduleTimings);
+
+/** Represents the timing when the next run loop cycle began.
+ 
+ @note This value equals to `NSRunLoopScheduleTimingBeforeTimers`.
+ */
+FOUNDATION_EXPORT NSRunLoopScheduleTimings const NSRunLoopScheduleTimingNextCycleBegan NS_REFINED_FOR_SWIFT;
+
+/** Represents the timing when the next run loop is idle.
+ 
+ @note This value equals to `NSRunLoopScheduleTimingBeforeWaiting`.
+ */
+FOUNDATION_EXPORT NSRunLoopScheduleTimings const NSRunLoopScheduleTimingIdle NS_REFINED_FOR_SWIFT;
+
+/** Represents the timing when the current run loop is ended.
+ 
+ @note This value equals to `NSRunLoopScheduleTimingAfterWaiting`.
+ */
+FOUNDATION_EXPORT NSRunLoopScheduleTimings const NSRunLoopScheduleTimingCurrentCycleEnded NS_REFINED_FOR_SWIFT;
 
 FOUNDATION_EXTERN NSString * NSStringFromNSRunLoopScheduleTimings(NSRunLoopScheduleTimings timings)
 NS_REFINED_FOR_SWIFT;

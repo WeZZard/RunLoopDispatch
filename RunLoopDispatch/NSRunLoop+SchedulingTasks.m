@@ -13,6 +13,10 @@
 #import "NSRunLoopTask.h"
 #import "_NSRunLoopTaskScheduler.h"
 
+NSRunLoopScheduleTimings const NSRunLoopScheduleTimingNextCycleBegan = NSRunLoopScheduleTimingBeforeTimers;
+NSRunLoopScheduleTimings const NSRunLoopScheduleTimingIdle = NSRunLoopScheduleTimingBeforeWaiting;
+NSRunLoopScheduleTimings const NSRunLoopScheduleTimingCurrentCycleEnded = NSRunLoopScheduleTimingAfterWaiting;
+
 typedef void NSRunLoopDealloc (__unsafe_unretained NSRunLoop * self, SEL _cmd);
 
 static NSRunLoopDealloc * kNSRunLoopDeallocOriginal = NULL;
