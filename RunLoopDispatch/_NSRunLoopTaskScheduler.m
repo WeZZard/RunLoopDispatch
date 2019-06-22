@@ -12,7 +12,7 @@
 
 #import <objc/runtime.h>
 
-static void HandleRunLoopActivity(CFRunLoopObserverRef observer, CFRunLoopActivity activity, void *info);
+static void _NSRunLoopTaskSchedulerHandleRunLoopActivity(CFRunLoopObserverRef observer, CFRunLoopActivity activity, void *info);
 
 @interface _NSRunLoopTaskScheduler()
 @property (nonatomic, unsafe_unretained, readonly) NSRunLoop * runLoop;
@@ -43,7 +43,7 @@ static void HandleRunLoopActivity(CFRunLoopObserverRef observer, CFRunLoopActivi
         
         CFRunLoopActivity requiredActivities = CFRunLoopActivityMakeWithTimings(NSRunLoopScheduleTimingAll);
         
-        _observer = CFRunLoopObserverCreate(kCFAllocatorDefault, requiredActivities, true, 0, &HandleRunLoopActivity, &(_context));
+        _observer = CFRunLoopObserverCreate(kCFAllocatorDefault, requiredActivities, true, 0, &_NSRunLoopTaskSchedulerHandleRunLoopActivity, &(_context));
         
         CFRunLoopAddObserver([runLoop getCFRunLoop], _observer, (__bridge CFStringRef)modes);
     }
@@ -91,7 +91,7 @@ static void HandleRunLoopActivity(CFRunLoopObserverRef observer, CFRunLoopActivi
 }
 @end
 
-void HandleRunLoopActivity(CFRunLoopObserverRef observer, CFRunLoopActivity activity, void *info) {
+void _NSRunLoopTaskSchedulerHandleRunLoopActivity(CFRunLoopObserverRef observer, CFRunLoopActivity activity, void *info) {
     _NSRunLoopTaskScheduler * scheduler = (__bridge _NSRunLoopTaskScheduler *)info;
     
     [scheduler runTasksWithActivity:activity];

@@ -8,25 +8,7 @@
 
 import Foundation
 
-extension RunLoopScheduleTimings {
-    /// Represents the timing when the next run loop cycle began.
-    ///
-    /// - Note: This value equals to `.beforeWaiting`.
-    ///
-    static let nextCycleBegan: RunLoopScheduleTimings = __NSRunLoopScheduleTimingNextCycleBegan
-    
-    /// Represents the timing when the next run loop is idle.
-    ///
-    /// - Note: This value equals to `.beforeWaiting`.
-    ///
-    static let idle: RunLoopScheduleTimings = __NSRunLoopScheduleTimingIdle
-    
-    /// Represents the timing when the current run loop is ended.
-    ///
-    /// - Note: This value equals to `.beforeWaiting`.
-    ///
-    static let currentCycleEnded: RunLoopScheduleTimings = __NSRunLoopScheduleTimingCurrentCycleEnded
-}
+// MARK: - RunLoop
 
 extension RunLoop {
     public typealias ScheduleTimings = RunLoopScheduleTimings
@@ -92,6 +74,32 @@ extension RunLoop {
     }
 }
 
+// MARK: - RunLoopScheduleTimings
+
+extension RunLoopScheduleTimings {
+    /// Represents the timing when the next run loop cycle began.
+    ///
+    /// - Note: This value equals to `.beforeWaiting`.
+    ///
+    public static let nextCycleBegan: RunLoopScheduleTimings = __NSRunLoopScheduleTimingNextCycleBegan
+    
+    /// Represents the timing when the next run loop is idle.
+    ///
+    /// - Note: This value equals to `.beforeWaiting`.
+    ///
+    public static let idle: RunLoopScheduleTimings = __NSRunLoopScheduleTimingIdle
+    
+    /// Represents the timing when the current run loop is ended.
+    ///
+    /// - Note: This value equals to `.beforeWaiting`.
+    ///
+    public static let currentCycleEnded: RunLoopScheduleTimings = __NSRunLoopScheduleTimingCurrentCycleEnded
+    
+    /// A convenience for `.all` schedule timings.
+    ///
+    public static let anyTime: RunLoopScheduleTimings = .all
+}
+
 extension RunLoopScheduleTimings: CustomStringConvertible,
     CustomDebugStringConvertible
 {
@@ -102,8 +110,4 @@ extension RunLoopScheduleTimings: CustomStringConvertible,
     public var debugDescription: String {
         return __NSStringFromNSRunLoopScheduleTimings(self)
     }
-}
-
-extension RunLoopScheduleTimings {
-    public static let anyTime: RunLoopScheduleTimings = all
 }

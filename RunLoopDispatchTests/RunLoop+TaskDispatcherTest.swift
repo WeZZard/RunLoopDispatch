@@ -11,7 +11,7 @@ import XCTest
 @testable
 import RunLoopDispatch
 
-private typealias TimingSymbols = RunLoop.Timings
+private typealias TimingSymbols = RunLoop.ScheduleTimings
 
 class RunLoop_TaskDispatcherTest: XCTestCase {
     private var timingSymbols: [TimingSymbols] = []
