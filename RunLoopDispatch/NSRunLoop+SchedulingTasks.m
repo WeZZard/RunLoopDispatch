@@ -167,14 +167,23 @@ NSString * NSStringFromNSRunLoopScheduleTimings(NSRunLoopScheduleTimings timings
     [description appendString:@"<NSRunLoopScheduleTimings:"];
     
     NSMutableArray * descriptions = [[NSMutableArray alloc] init];
-    if ((timings & NSRunLoopScheduleTimingNextCycleBegan) != 0) {
-        [descriptions addObject:@"Next Cycle Began"];
+    if ((timings & NSRunLoopScheduleTimingEntry) != 0) {
+        [descriptions addObject:@"Entry"];
     }
-    if ((timings & NSRunLoopScheduleTimingIdle) != 0) {
-        [descriptions addObject:@"Idel"];
+    if ((timings & NSRunLoopScheduleTimingBeforeTimers) != 0) {
+        [descriptions addObject:@"Before Timers"];
     }
-    if ((timings & NSRunLoopScheduleTimingCurrentCycleEnded) != 0) {
-        [descriptions addObject:@"Current Cycle Ended"];
+    if ((timings & NSRunLoopScheduleTimingBeforeSources) != 0) {
+        [descriptions addObject:@"Before Sources"];
+    }
+    if ((timings & NSRunLoopScheduleTimingBeforeWaiting) != 0) {
+        [descriptions addObject:@"Before Waiting"];
+    }
+    if ((timings & NSRunLoopScheduleTimingAfterWaiting) != 0) {
+        [descriptions addObject:@"After Waiting"];
+    }
+    if ((timings & NSRunLoopScheduleTimingExit) != 0) {
+        [descriptions addObject:@"Exit"];
     }
     if (descriptions.count == 0) {
         [description appendString:@" Empty"];

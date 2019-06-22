@@ -28,16 +28,28 @@ FOUNDATION_STATIC_INLINE CFRunLoopActivity CFRunLoopActivityMakeWithTimings(NSRu
 CFRunLoopActivity CFRunLoopActivityMakeWithTimings(NSRunLoopScheduleTimings timings) {
     CFRunLoopActivity activities = 0;
     
-    if ((timings & NSRunLoopScheduleTimingNextCycleBegan) != 0) {
+    if ((timings & NSRunLoopScheduleTimingEntry) != 0) {
+        activities |= kCFRunLoopEntry;
+    }
+    
+    if ((timings & NSRunLoopScheduleTimingBeforeTimers) != 0) {
         activities |= kCFRunLoopBeforeTimers;
     }
     
-    if ((timings & NSRunLoopScheduleTimingIdle) != 0) {
+    if ((timings & NSRunLoopScheduleTimingBeforeSources) != 0) {
+        activities |= kCFRunLoopBeforeSources;
+    }
+    
+    if ((timings & NSRunLoopScheduleTimingBeforeWaiting) != 0) {
         activities |= kCFRunLoopBeforeWaiting;
     }
     
-    if ((timings & NSRunLoopScheduleTimingCurrentCycleEnded) != 0) {
+    if ((timings & NSRunLoopScheduleTimingAfterWaiting) != 0) {
         activities |= kCFRunLoopAfterWaiting;
+    }
+    
+    if ((timings & NSRunLoopScheduleTimingExit) != 0) {
+        activities |= kCFRunLoopExit;
     }
     
     return activities;
